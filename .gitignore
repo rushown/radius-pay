@@ -1,0 +1,23 @@
+# Foundry
+out/
+cache/
+broadcast/
+lib/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Env files — NEVER commit
+.env
+.env.local
+.env.production
+
+# DB
+*.db
+data/
+
+# Misc
+.DS_Store
+*.log
