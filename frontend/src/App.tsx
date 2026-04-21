@@ -4,6 +4,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster }                      from 'react-hot-toast';
 import { wagmiConfig }                  from './config/wagmi';
 import { Layout }                       from './components/Layout';
+import { ErrorBoundary }                from './components/ErrorBoundary';
+import { WalletGuard }                  from './components/WalletGuard';
+import { NetworkGuard }                 from './components/NetworkGuard';
 import { Home }                         from './pages/Home';
 import { CreateClaim }                  from './pages/CreateClaim';
 import { Claim }                        from './pages/Claim';
@@ -22,6 +25,7 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
+    <ErrorBoundary>
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
@@ -36,6 +40,8 @@ export default function App() {
               },
             }}
           />
+            <WalletGuard />
+            <NetworkGuard />
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index                    element={<Home />} />
@@ -47,5 +53,6 @@ export default function App() {
         </BrowserRouter>
       </QueryClientProvider>
     </WagmiProvider>
+    </ErrorBoundary>
   );
 }
